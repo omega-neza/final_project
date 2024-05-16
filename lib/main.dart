@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Smart Home Monitoring',
       theme: themeNotifier.currentTheme.copyWith(
         primaryColor: Colors.blue.shade900,
         hintColor: Colors.white,
@@ -120,14 +120,14 @@ class MyHomePage extends StatelessWidget {
               iconSize: 50,
               icon: Image.asset('lib/assets/chart.gif', width: 50, height: 50),
               onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) =>  RealTimeChartPage(
+                  MaterialPageRoute(builder: (context) =>  const RealTimeChartPage(
                     
                     ),
                   ),
                 )
             ),
             const Text(
-              'Light Sensor',
+              'Realtime chart',
               style: TextStyle(color: Colors.black),
             ),
           ],

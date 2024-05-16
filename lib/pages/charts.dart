@@ -4,24 +4,24 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: RealTimeChartPage(),
-  ));
+  runApp(const MaterialApp(home: RealTimeChartPage()));
 }
 
 class RealTimeChartPage extends StatelessWidget {
+  const RealTimeChartPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Real Time Chart'),
-      ),
-      body: RealTimeChart(),
+      appBar: AppBar(title: const Text('Real Time Chart')),
+      body: const RealTimeChart(),
     );
   }
 }
 
 class RealTimeChart extends StatefulWidget {
+  const RealTimeChart({super.key});
+
   @override
   _RealTimeChartState createState() => _RealTimeChartState();
 }
@@ -35,8 +35,8 @@ class _RealTimeChartState extends State<RealTimeChart> {
   void initState() {
     super.initState();
     _chartData = <_ChartData>[];
-    _startTimer();
     _initializeNotifications();
+    _startTimer();
   }
 
   @override
@@ -46,61 +46,65 @@ class _RealTimeChartState extends State<RealTimeChart> {
   }
 
   void _initializeNotifications() {
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettings =
-        InitializationSettings(android: initializationSettingsAndroid);
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    final InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
-  void _showNotification(String title, String body) async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'your channel id',
-      'your channel name',
+  Future<void> _showNotification(String title, String body) async {
+    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      'sensor_channel', // Ensure unique ID
+      'Sensor Notifications', // Human-readable name
+      channelDescription: 'Notification channel for sensor data alerts',
       importance: Importance.max,
       priority: Priority.high,
     );
-    var platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
+    const NotificationDetails platformDetails = NotificationDetails(android: androidDetails);
     await flutterLocalNotificationsPlugin.show(
-      0,
+      0, // Notification ID
       title,
       body,
-      platformChannelSpecifics,
-      payload: 'item x',
+      platformDetails,
     );
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), _updateData);
-  }
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      final DateTime now = DateTime.now();
+      final double newValue = _getRandomValue();
 
-  void _updateData(Timer timer) {
-    setState(() {
-      _chartData.add(_ChartData(DateTime.now(), _getRandomValue()));
-      if (_chartData.length > 20) {
-        _chartData.removeAt(0);
+      if (mounted) {
+        setState(() {
+          _chartData.add(_ChartData(now, newValue));
+          if (_chartData.length > 20) {
+            _chartData.removeAt(0); // Keeps the data point count constant
+          }
+        });
       }
-      if (_chartData.length >= 10 && _chartData.last.y > 80) {
+
+      if (newValue > 80) {
         _showNotification('Alert', 'High sensor reading detected!');
       }
     });
   }
 
   double _getRandomValue() {
-    return (50 + (100 - 50) * (1 - (DateTime.now().second / 60))).toDouble();
+    return 50 + (50 * (1 - (DateTime.now().second / 60))).toDouble();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: SfCartesianChart(
-        primaryXAxis: DateTimeAxis(),
-        primaryYAxis: NumericAxis(),
-        series: <LineSeries<_ChartData, DateTime>>[
+        primaryXAxis: DateTimeAxis(autoScrollingMode: AutoScrollingMode.end),
+        primaryYAxis: NumericAxis(interval: 10), // Set the Y-axis interval
+        series: <ChartSeries<_ChartData, DateTime>>[
           LineSeries<_ChartData, DateTime>(
+            animationDuration: 0, // Optional: disables animation for realtime effect
             dataSource: _chartData,
             xValueMapper: (_ChartData data, _) => data.time,
             yValueMapper: (_ChartData data, _) => data.y,
@@ -113,6 +117,7 @@ class _RealTimeChartState extends State<RealTimeChart> {
 
 class _ChartData {
   _ChartData(this.time, this.y);
+
   final DateTime time;
   final double y;
 }

@@ -8,8 +8,8 @@ class LightSensorPage extends StatefulWidget {
 
   const LightSensorPage({
     required this.flutterLocalNotificationsPlugin,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _LightSensorPageState createState() => _LightSensorPageState();
@@ -76,14 +76,14 @@ class _LightSensorPageState extends State<LightSensorPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Ambient Light Intensity:',
               style: TextStyle(fontSize: 20),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               '$_lightIntensity lux',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ],
         ),
