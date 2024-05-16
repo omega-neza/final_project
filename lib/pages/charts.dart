@@ -13,7 +13,13 @@ class RealTimeChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Real Time Chart')),
+      appBar: AppBar(
+        title: const Text(
+          'Light Sensor',
+          style: TextStyle(color: Colors.blue),
+        ),
+        backgroundColor: Colors.white, // Set the AppBar color to blue
+      ),
       body: const RealTimeChart(),
     );
   }
@@ -97,19 +103,42 @@ class _RealTimeChartState extends State<RealTimeChart> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: SfCartesianChart(
-        primaryXAxis: DateTimeAxis(autoScrollingMode: AutoScrollingMode.end),
-        primaryYAxis: NumericAxis(interval: 10), // Set the Y-axis interval
-        series: <ChartSeries<_ChartData, DateTime>>[
-          LineSeries<_ChartData, DateTime>(
-            animationDuration: 0, // Optional: disables animation for realtime effect
-            dataSource: _chartData,
-            xValueMapper: (_ChartData data, _) => data.time,
-            yValueMapper: (_ChartData data, _) => data.y,
-          ),
-        ],
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            const Text(
+              'Real Time Sensor Data',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 300, // Fixed height for the chart
+              child: SfCartesianChart(
+                title: ChartTitle(text: 'Sensor Data Over Time'),
+                legend: Legend(isVisible: false),
+                primaryXAxis: DateTimeAxis(
+                  title: AxisTitle(text: 'Time'),
+                  autoScrollingMode: AutoScrollingMode.end,
+                ),
+                primaryYAxis: NumericAxis(
+                  title: AxisTitle(text: 'Sensor Value'),
+                  interval: 10, // Adjust interval based on data range
+                ),
+                series: <ChartSeries<_ChartData, DateTime>>[
+                  LineSeries<_ChartData, DateTime>(
+                    animationDuration: 0, // Optional: disables animation for realtime effect
+                    dataSource: _chartData,
+                    xValueMapper: (_ChartData data, _) => data.time,
+                    yValueMapper: (_ChartData data, _) => data.y,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
