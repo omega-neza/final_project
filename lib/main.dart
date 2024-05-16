@@ -4,7 +4,7 @@ import 'package:final_project/components/themes.dart';
 import 'package:final_project/pages/StepCounter.dart';
 import 'package:final_project/pages/lightsensor.dart';
 import 'package:final_project/pages/maps.dart';
-//import 'package:final_project/pages/proximitysensor.dart';
+import 'package:final_project/pages/charts.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() async {
@@ -88,16 +88,7 @@ class MyHomePage extends StatelessWidget {
               'Maps',
               style: TextStyle(color: Colors.black),
             ),
-            // IconButton(
-            //   iconSize: 50,
-            //   icon: Icon(Icons.sensor_door, color: theme.primaryColor),
-            //   onPressed: () => Navigator.of(context).push(
-            //       MaterialPageRoute(builder: (context) => const ProximityPage())),
-            // ),
-            // const Text(
-            //   'Proximity Sensor',
-            //   style: TextStyle(color: Colors.black),
-            // ),
+            
             IconButton(
               iconSize: 50,
               icon: Image.asset('lib/assets/walk.gif', width: 50, height: 50),
@@ -116,6 +107,21 @@ class MyHomePage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) =>  LightSensorPage(
                       flutterLocalNotificationsPlugin:
                           flutterLocalNotificationsPlugin,
+                    ),
+                  ),
+                )
+            ),
+            const Text(
+              'Light Sensor',
+              style: TextStyle(color: Colors.black),
+            ),
+
+             IconButton(
+              iconSize: 50,
+              icon: Image.asset('lib/assets/chart.gif', width: 50, height: 50),
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) =>  RealTimeChartPage(
+                    
                     ),
                   ),
                 )

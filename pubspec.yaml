@@ -47,6 +47,7 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   light_sensor: ^3.0.0
   flutter_local_notifications: ^17.1.2
+  syncfusion_flutter_charts: ^19.3.55
 
 dev_dependencies:
   flutter_test:
@@ -74,14 +75,13 @@ flutter:
   assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-  - lib/assets/Animation - 1712058538433.json
-  - lib/assets/Animation - 1712341175314.json
-  - lib/assets/compass-arrow-navigation.png
+ 
   - lib/assets/bulb.png
   - lib/assets/walking.png
   - lib/assets/light.gif
   - lib/assets/walk.gif
   - lib/assets/location.gif
+  - lib/assets/chart.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
