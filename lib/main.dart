@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:final_project/components/ThemeProvider.dart';
-import 'package:final_project/screens/StepCounter.dart';
-import 'package:final_project/screens/lightsensor.dart';
-import 'package:final_project/screens/maps.dart';
-import 'package:final_project/screens/proximitysensor.dart';
+import 'package:final_project/components/themes.dart';
+import 'package:final_project/pages/StepCounter.dart';
+import 'package:final_project/pages/lightsensor.dart';
+import 'package:final_project/pages/maps.dart';
+import 'package:final_project/pages/proximitysensor.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() async {
@@ -102,7 +102,7 @@ class MyHomePage extends StatelessWidget {
               iconSize: 50,
               icon: Icon(Icons.directions_walk, color: theme.primaryColor),
               onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => StepCounterPage())),
+                  MaterialPageRoute(builder: (context) => const StepCounterPage())),
             ),
             const Text(
               'Step Counter',

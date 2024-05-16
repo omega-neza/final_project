@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:proximity_sensor/proximity_sensor.dart';
-import 'package:final_project/components/ThemeProvider.dart';
+import 'package:final_project/components/themes.dart';
 
 void main() {
   runApp(MaterialApp(

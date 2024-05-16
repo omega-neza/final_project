@@ -6,15 +6,15 @@ class ThemeNotifier with ChangeNotifier {
   final String key = "theme";
   SharedPreferences? _prefs;
 
-  ThemeNotifier() : _currentTheme = yellowTheme {
+  ThemeNotifier() : _currentTheme = whiteTheme {
     _loadFromPrefs();
   }
 
   ThemeData get currentTheme => _currentTheme;
 
   Future<void> toggleTheme() async {
-    _currentTheme = (_currentTheme == yellowTheme) ? blackTheme : yellowTheme;
-    await _saveToPrefs(_currentTheme == yellowTheme ? 'yellow' : 'black');
+    _currentTheme = (_currentTheme == whiteTheme) ? blueTheme : whiteTheme;
+    await _saveToPrefs(_currentTheme == whiteTheme ? 'white' : 'blue');
     notifyListeners();
   }
 
@@ -24,8 +24,8 @@ class ThemeNotifier with ChangeNotifier {
 
   Future<void> _loadFromPrefs() async {
     await _initPrefs();
-    final themeStr = _prefs!.getString(key) ?? 'yellow';
-    _currentTheme = (themeStr == 'black') ? blackTheme : yellowTheme;
+    final themeStr = _prefs!.getString(key) ?? 'white';
+    _currentTheme = (themeStr == 'blue') ? blueTheme : whiteTheme;
     notifyListeners();
   }
 
@@ -35,28 +35,28 @@ class ThemeNotifier with ChangeNotifier {
   }
 }
 
-ThemeData yellowTheme = ThemeData(
-  primaryColor: Colors.yellow,
-  hintColor: Colors.black,
-  scaffoldBackgroundColor: Colors.yellow,
+ThemeData whiteTheme = ThemeData(
+  primaryColor: Colors.white,
+  hintColor: Colors.blue,
+  scaffoldBackgroundColor: Colors.white,
   // Define other text styles as needed
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: Colors.yellow,
-    selectedItemColor: Colors.black,
-    unselectedItemColor: Colors.white, // Or any other color
+    backgroundColor: Colors.white,
+    selectedItemColor: Colors.blue,
+    unselectedItemColor: Colors.black, // Or any other color
   ),
   // Add other customizations as needed
 );
 
-ThemeData blackTheme = ThemeData(
-  primaryColor: Colors.black,
-  hintColor: Colors.yellow,
-  scaffoldBackgroundColor: Colors.black,
+ThemeData blueTheme = ThemeData(
+  primaryColor: Colors.blue,
+  hintColor: Colors.white,
+  scaffoldBackgroundColor: Colors.blue,
   // Define other text styles as needed
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: Colors.black,
-    selectedItemColor: Colors.yellow,
-    unselectedItemColor: Colors.white, // Or any other color
+    backgroundColor: Colors.blue,
+    selectedItemColor: Colors.white,
+    unselectedItemColor: Colors.black, // Or any other color
   ),
   // Add other customizations as needed
 );

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:lottie/lottie.dart';
 import 'package:final_project/main.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
@@ -71,11 +70,11 @@ class _StepCounterPageState extends State<StepCounterPage> {
           NotificationDetails(android: androidPlatformChannelSpecifics);
       await flutterLocalNotificationsPlugin.show(
         0,
-        'Hello!',
-        'Motion detected! Keep It Up',
+        '',
+        'You are currently in motion',
         platformChannelSpecifics,
       );
-      print('Motion detected! Alerting user...');
+      print('Motion detected!');
       _notificationShown = true; // Set notification shown flag
     }
   }
@@ -98,10 +97,10 @@ class _StepCounterPageState extends State<StepCounterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset(
-              'lib/assets/Animation - 1712341175314.json',
-              width: 400,
-              height: 400,
+            Image.asset(
+              'lib/assets/walking.png',
+              width: 200,
+              height: 200,
             ),
             Text(
               'Step Count:',
