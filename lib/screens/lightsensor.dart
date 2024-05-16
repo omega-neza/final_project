@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:light_sensor/light_sensor.dart';
 
 class LightSensorPage extends StatefulWidget {
+  const LightSensorPage({super.key});
+
   @override
   _LightSensorPageState createState() => _LightSensorPageState();
 }
@@ -69,7 +71,7 @@ class _LightSensorPageState extends State<LightSensorPage> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -104,15 +106,15 @@ class _LightSensorPageState extends State<LightSensorPage> {
                 height: 200,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color.fromARGB(255, 255, 221, 1)
+                  color: const Color.fromARGB(255, 255, 221, 1)
                       .withOpacity(containerOpacity),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 255, 221, 1)
+                      color: const Color.fromARGB(255, 255, 221, 1)
                           .withOpacity(containerOpacity),
                       blurRadius: 10,
                       spreadRadius: 10,
-                      offset: Offset(0, 0),
+                      offset: const Offset(0, 0),
                     ),
                   ],
                 ),

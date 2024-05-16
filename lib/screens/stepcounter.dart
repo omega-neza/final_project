@@ -6,6 +6,8 @@ import 'package:final_project/main.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
 class StepCounterPage extends StatefulWidget {
+  const StepCounterPage({super.key});
+
   @override
   _StepCounterPageState createState() => _StepCounterPageState();
 }
@@ -112,9 +114,9 @@ class _StepCounterPageState extends State<StepCounterPage> {
                   fontWeight: FontWeight.bold,
                   color: theme.hintColor),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _motionDetected
-                ? Text(
+                ? const Text(
                     'Motion Detected!',
                     style: TextStyle(
                       fontSize: 20,
@@ -122,7 +124,7 @@ class _StepCounterPageState extends State<StepCounterPage> {
                       color: Colors.red, // Highlight in red for emphasis
                     ),
                   )
-                : Text(
+                : const Text(
                     'At rest',
                     style: TextStyle(
                       fontSize: 20,

@@ -40,7 +40,7 @@ ThemeData yellowTheme = ThemeData(
   hintColor: Colors.black,
   scaffoldBackgroundColor: Colors.yellow,
   // Define other text styles as needed
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Colors.yellow,
     selectedItemColor: Colors.black,
     unselectedItemColor: Colors.white, // Or any other color
@@ -53,7 +53,7 @@ ThemeData blackTheme = ThemeData(
   hintColor: Colors.yellow,
   scaffoldBackgroundColor: Colors.black,
   // Define other text styles as needed
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Colors.black,
     selectedItemColor: Colors.yellow,
     unselectedItemColor: Colors.white, // Or any other color

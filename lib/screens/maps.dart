@@ -15,16 +15,16 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  Location _locationController = Location();
+  final Location _locationController = Location();
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
-  LatLng _kigaliCenter =
-      LatLng(-1.9441, 30.0619); //  Kigali center
+  final LatLng _kigaliCenter =
+      const LatLng(-1.9441, 30.0619); //  Kigali center
   static const LatLng _pGooglePlex = LatLng(37.4223, -122.0848);
   static const LatLng _pApplePark = LatLng(37.3346, -122.0090);
   LatLng? _currentP;
   Map<PolylineId, Polyline> polylines = {};
-  Map<PolygonId, Polygon> _polygons = {};
+  final Map<PolygonId, Polygon> _polygons = {};
   StreamSubscription<LocationData>? _locationSubscription;
   bool _notificationSentOutSide = false;
   bool _notificationSentInSide = false;
@@ -76,15 +76,15 @@ class _MapPageState extends State<MapPage> {
               polygons: Set<Polygon>.of(_polygons.values),
               markers: {
                 Marker(
-                  markerId: MarkerId("_currentLocation"),
+                  markerId: const MarkerId("_currentLocation"),
                   icon: BitmapDescriptor.defaultMarker,
                   position: _currentP!,
                 ),
-                Marker(
+                const Marker(
                     markerId: MarkerId("_sourceLocation"),
                     icon: BitmapDescriptor.defaultMarker,
                     position: _pGooglePlex),
-                Marker(
+                const Marker(
                     markerId: MarkerId("_destionationLocation"),
                     icon: BitmapDescriptor.defaultMarker,
                     position: _pApplePark)
@@ -143,14 +143,14 @@ class _MapPageState extends State<MapPage> {
   void _createGeofence() {
     
     List<LatLng> kigaliBoundaries = [
-      LatLng(-1.9740, 30.0274), // Northwest corner
-      LatLng(-1.9740, 30.1300), // Northeast corner
-      LatLng(-1.8980, 30.1300), // Southeast corner
-      LatLng(-1.8980, 30.0274), // Southwest corner
+      const LatLng(-1.9740, 30.0274), // Northwest corner
+      const LatLng(-1.9740, 30.1300), // Northeast corner
+      const LatLng(-1.8980, 30.1300), // Southeast corner
+      const LatLng(-1.8980, 30.0274), // Southwest corner
     ];
 
   
-    PolygonId polygonId = PolygonId('kigali');
+    PolygonId polygonId = const PolygonId('kigali');
     Polygon polygon = Polygon(
       polygonId: polygonId,
       points: kigaliBoundaries,
@@ -191,10 +191,10 @@ class _MapPageState extends State<MapPage> {
     // Check if the provided location is inside the geofence boundaries
     bool isInside = false;
     List<LatLng> kigaliBoundaries = [
-      LatLng(-1.9740, 30.0274),
-      LatLng(-1.9740, 30.1300),
-      LatLng(-1.8980, 30.1300),
-      LatLng(-1.8980, 30.0274),
+      const LatLng(-1.9740, 30.0274),
+      const LatLng(-1.9740, 30.1300),
+      const LatLng(-1.8980, 30.1300),
+      const LatLng(-1.8980, 30.0274),
     ];
 
     // Algorithm to determine if a point is inside a polygon
@@ -223,31 +223,31 @@ class _MapPageState extends State<MapPage> {
 
   Future<void> _cameraToPosition(LatLng pos) async {
     final GoogleMapController controller = await _mapController.future;
-    CameraPosition _newCameraPosition = CameraPosition(
+    CameraPosition newCameraPosition = CameraPosition(
       target: pos,
       zoom: 13,
     );
     await controller.animateCamera(
-      CameraUpdate.newCameraPosition(_newCameraPosition),
+      CameraUpdate.newCameraPosition(newCameraPosition),
     );
   }
 
   Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
 
-    _serviceEnabled = await _locationController.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await _locationController.requestService();
-      if (!_serviceEnabled) {
+    serviceEnabled = await _locationController.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await _locationController.requestService();
+      if (!serviceEnabled) {
         return;
       }
     }
 
-    _permissionGranted = await _locationController.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _locationController.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    permissionGranted = await _locationController.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await _locationController.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         return;
       }
     }
@@ -280,16 +280,16 @@ class _MapPageState extends State<MapPage> {
   void addLocationToPolyline(LatLng newLocation) {
     setState(() {
       // Check if polyline exists, if not create one
-      if (polylines.containsKey(PolylineId("path"))) {
-        final polyline = polylines[PolylineId("path")]!;
+      if (polylines.containsKey(const PolylineId("path"))) {
+        final polyline = polylines[const PolylineId("path")]!;
         final updatedPoints = List<LatLng>.from(polyline.points)
           ..add(newLocation);
-        polylines[PolylineId("path")] =
+        polylines[const PolylineId("path")] =
             polyline.copyWith(pointsParam: updatedPoints);
       } else {
         // Create new polyline if it doesn't exist
-        polylines[PolylineId("path")] = Polyline(
-          polylineId: PolylineId("path"),
+        polylines[const PolylineId("path")] = Polyline(
+          polylineId: const PolylineId("path"),
           color: Colors.blue,
           points: [newLocation],
           width: 5,
@@ -308,9 +308,9 @@ class _MapPageState extends State<MapPage> {
       travelMode: TravelMode.driving,
     );
     if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
+      for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+      }
     } else {
       print(result.errorMessage);
     }
@@ -318,7 +318,7 @@ class _MapPageState extends State<MapPage> {
   }
 
   void generatePolyLineFromPoints(List<LatLng> polylineCoordinates) async {
-    PolylineId id = PolylineId("poly");
+    PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id,
         color: Colors.black,

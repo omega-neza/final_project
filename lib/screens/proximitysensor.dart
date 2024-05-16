@@ -17,7 +17,7 @@ void main() {
 
 class ProximityPage extends StatefulWidget {
   // Add a key to the ProximityPage widget
-  const ProximityPage({Key? key}) : super(key: key);
+  const ProximityPage({super.key});
 
   @override
   _ProximityPageState createState() => _ProximityPageState();

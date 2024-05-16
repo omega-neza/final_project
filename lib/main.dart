@@ -24,7 +24,7 @@ Future<void> initNotifications() async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
 
-  final InitializationSettings initializationSettings = InitializationSettings(
+  const InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
   );
 
@@ -37,7 +37,7 @@ Future<void> initNotifications() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
-  const MyHomePage({required this.title, Key? key}) : super(key: key);
+  const MyHomePage({required this.title, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +82,9 @@ class MyHomePage extends StatelessWidget {
               icon: Icon(Icons.map, color: theme.primaryColor),
               onPressed: () =>
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => MapPage())),
+                      builder: (context) => const MapPage())),
             ),
-            Text(
+            const Text(
               'Maps',
               style: TextStyle(color: Colors.black),
             ),
@@ -92,9 +92,9 @@ class MyHomePage extends StatelessWidget {
               iconSize: 50,
               icon: Icon(Icons.sensor_door, color: theme.primaryColor),
               onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => ProximityPage())),
+                  MaterialPageRoute(builder: (context) => const ProximityPage())),
             ),
-            Text(
+            const Text(
               'Proximity Sensor',
               style: TextStyle(color: Colors.black),
             ),
@@ -104,7 +104,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => StepCounterPage())),
             ),
-            Text(
+            const Text(
               'Step Counter',
               style: TextStyle(color: Colors.black),
             ),
@@ -113,9 +113,9 @@ class MyHomePage extends StatelessWidget {
               iconSize: 50,
               icon: Icon(Icons.lightbulb, color: theme.primaryColor),
               onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => LightSensorPage())),
+                  MaterialPageRoute(builder: (context) => const LightSensorPage())),
             ),
-            Text(
+            const Text(
               'Light Sensor',
               style: TextStyle(color: Colors.black),
             ),
