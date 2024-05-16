@@ -20,8 +20,8 @@ class _MapPageState extends State<MapPage> {
       Completer<GoogleMapController>();
   final LatLng _kigaliCenter =
       const LatLng(-1.9441, 30.0619); //  Kigali center
-  static const LatLng _pGooglePlex = LatLng(37.4223, -122.0848);
-  static const LatLng _pApplePark = LatLng(37.3346, -122.0090);
+  static const LatLng _pGooglePlex = LatLng(-1.9547, 30.0934);
+  static const LatLng _pCasa = LatLng(-1.937149, 30.140436);
   LatLng? _currentP;
   Map<PolylineId, Polyline> polylines = {};
   final Map<PolygonId, Polygon> _polygons = {};
@@ -64,7 +64,7 @@ class _MapPageState extends State<MapPage> {
       ),
       body: _currentP == null
           ? const Center(
-              child: Text("Loading..."),
+              child: Text("Loading"),
             )
           : GoogleMap(
               onMapCreated: ((GoogleMapController controller) =>
@@ -87,7 +87,7 @@ class _MapPageState extends State<MapPage> {
                 const Marker(
                     markerId: MarkerId("_destionationLocation"),
                     icon: BitmapDescriptor.defaultMarker,
-                    position: _pApplePark)
+                    position: _pCasa)
               },
               polylines: Set<Polyline>.of(polylines.values),
             ),
@@ -304,7 +304,7 @@ class _MapPageState extends State<MapPage> {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       GOOGLE_MAPS_API_KEY,
       PointLatLng(_pGooglePlex.latitude, _pGooglePlex.longitude),
-      PointLatLng(_pApplePark.latitude, _pApplePark.longitude),
+      PointLatLng(_pCasa.latitude, _pCasa.longitude),
       travelMode: TravelMode.driving,
     );
     if (result.points.isNotEmpty) {

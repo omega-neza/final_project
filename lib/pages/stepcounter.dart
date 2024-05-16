@@ -116,7 +116,7 @@ class _StepCounterPageState extends State<StepCounterPage> {
             const SizedBox(height: 20),
             _motionDetected
                 ? const Text(
-                    'Motion Detected!',
+                    'In motion',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -124,11 +124,11 @@ class _StepCounterPageState extends State<StepCounterPage> {
                     ),
                   )
                 : const Text(
-                    'At rest',
+                    'No Motion',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green, // Use green color for rest
+                      color: Color.fromARGB(255, 5, 5, 5), // Use green color for rest
                     ),
                   ),
           ],

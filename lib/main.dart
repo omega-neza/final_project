@@ -4,7 +4,7 @@ import 'package:final_project/components/themes.dart';
 import 'package:final_project/pages/StepCounter.dart';
 import 'package:final_project/pages/lightsensor.dart';
 import 'package:final_project/pages/maps.dart';
-import 'package:final_project/pages/proximitysensor.dart';
+//import 'package:final_project/pages/proximitysensor.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() async {
@@ -79,7 +79,7 @@ class MyHomePage extends StatelessWidget {
           
             IconButton(
               iconSize: 50,
-              icon: Icon(Icons.map, color: theme.primaryColor),
+              icon: Image.asset('lib/assets/location.gif', width: 50, height: 50),
               onPressed: () =>
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const MapPage())),
@@ -88,19 +88,19 @@ class MyHomePage extends StatelessWidget {
               'Maps',
               style: TextStyle(color: Colors.black),
             ),
+            // IconButton(
+            //   iconSize: 50,
+            //   icon: Icon(Icons.sensor_door, color: theme.primaryColor),
+            //   onPressed: () => Navigator.of(context).push(
+            //       MaterialPageRoute(builder: (context) => const ProximityPage())),
+            // ),
+            // const Text(
+            //   'Proximity Sensor',
+            //   style: TextStyle(color: Colors.black),
+            // ),
             IconButton(
               iconSize: 50,
-              icon: Icon(Icons.sensor_door, color: theme.primaryColor),
-              onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const ProximityPage())),
-            ),
-            const Text(
-              'Proximity Sensor',
-              style: TextStyle(color: Colors.black),
-            ),
-            IconButton(
-              iconSize: 50,
-              icon: Icon(Icons.directions_walk, color: theme.primaryColor),
+              icon: Image.asset('lib/assets/walk.gif', width: 50, height: 50),
               onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const StepCounterPage())),
             ),
@@ -111,9 +111,14 @@ class MyHomePage extends StatelessWidget {
            
             IconButton(
               iconSize: 50,
-              icon: Icon(Icons.lightbulb, color: theme.primaryColor),
+              icon: Image.asset('lib/assets/light.gif', width: 50, height: 50),
               onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const LightSensorPage())),
+                  MaterialPageRoute(builder: (context) =>  LightSensorPage(
+                      flutterLocalNotificationsPlugin:
+                          flutterLocalNotificationsPlugin,
+                    ),
+                  ),
+                )
             ),
             const Text(
               'Light Sensor',

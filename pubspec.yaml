@@ -80,7 +80,8 @@ flutter:
   - lib/assets/bulb.png
   - lib/assets/walking.png
   - lib/assets/light.gif
-
+  - lib/assets/walk.gif
+  - lib/assets/location.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
