@@ -79,6 +79,7 @@ flutter:
   - lib/assets/compass-arrow-navigation.png
   - lib/assets/bulb.png
   - lib/assets/walking.png
+  - lib/assets/light.gif
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

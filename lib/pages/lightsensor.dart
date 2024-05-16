@@ -121,7 +121,7 @@ class _LightSensorPageState extends State<LightSensorPage> {
               ),
             ),
             Image.asset(
-              'lib/assets/bulb.png',
+              'lib/assets/light.gif',
               width: 400,
               height: 400,
             ),
